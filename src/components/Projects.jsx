@@ -30,37 +30,37 @@ const projects = [
     featured: true,
   },
   {
-    id: 'prameya',
-    name: 'PrameyaEngine',
-    tagline: 'Digital Forensic Analysis Tool',
+    id: 'kernelstream',
+    name: 'Kernel-Stream',
+    tagline: 'Linux Observability Pipeline',
     description:
-      'A specialized digital forensic tool engineered to detect image tampering and ensure data integrity. Built using advanced image analysis algorithms to identify manipulated media and maintain evidentiary chain of custody.',
-    tags: ['Full-Stack', 'Cybersecurity', 'Digital Forensics', 'Image Analysis', 'Data Integrity'],
-    icon: Search,
+      'A full-stack Linux observability pipeline that uses eBPF to capture kernel-level events with minimal overhead, gRPC for high-performance telemetry transport, and a React dashboard for real-time visualization of system metrics and traces.',
+    tags: ['eBPF', 'gRPC', 'React', 'Linux Kernel', 'JavaScript', 'Observability'],
+    icon: Cpu,
     color: '#a855f7',
     gradient: 'from-purple-500/20 to-pink-600/10',
     borderGradient: 'rgba(168,85,247,0.3)',
     glowColor: 'rgba(168,85,247,0.15)',
-    badge: 'Security Tool',
+    badge: 'Systems Engineering',
     badgeColor: '#a855f7',
-    githubUrl: 'https://github.com/Krishna-cell-12',
+    githubUrl: 'https://github.com/Krishna-cell-12/Kernel-Stream',
     featured: true,
   },
   {
-    id: 'fossee',
-    name: 'FOSSEE-OSHW Arduino Simulator',
-    tagline: 'Web-Based Hardware Simulator',
+    id: 'visionsync',
+    name: 'Vision-Sync',
+    tagline: 'AI Assistive System · <500ms Latency',
     description:
-      'A web-based hardware simulator built as a screening task for FOSSEE (Free and Open-Source Software for Education) at IIT Bombay. Enables real-time code execution and simulation of Arduino microcontrollers directly in the browser using avr8js.',
-    tags: ['React', 'avr8js', 'WebAssembly', 'Arduino', 'FOSSEE', 'IIT Bombay'],
-    icon: Cpu,
+      'A real-time, low-latency (<500ms) AI assistive system for the visually impaired. Uses YOLOv8 for object detection and WebRTC for live video streaming, mapping visual environments into 3D spatial audio fields to enable independent navigation.',
+    tags: ['YOLOv8', 'WebRTC', 'Python', 'Spatial Audio', 'AI', 'Computer Vision'],
+    icon: Search,
     color: '#39d353',
     gradient: 'from-green-500/20 to-emerald-600/10',
     borderGradient: 'rgba(57,211,83,0.3)',
     glowColor: 'rgba(57,211,83,0.15)',
-    badge: 'FOSSEE · IIT Bombay',
+    badge: 'AI & Accessibility',
     badgeColor: '#39d353',
-    githubUrl: 'https://github.com/Krishna-cell-12',
+    githubUrl: 'https://github.com/Krishna-cell-12/Vision-Sync',
     featured: true,
   },
 ];
@@ -100,8 +100,8 @@ export default function Projects() {
             <span className="gradient-text">Projects</span>
           </h2>
           <p className="text-cyber-muted mt-3 max-w-xl mx-auto text-sm sm:text-base">
-            Handpicked highlights spanning threat intelligence, digital forensics, and
-            hardware simulation — each solving real engineering challenges.
+            Handpicked highlights spanning threat intelligence, kernel observability, and
+            AI-powered assistive tech — each tackling a real engineering problem.
           </p>
         </motion.div>
 
