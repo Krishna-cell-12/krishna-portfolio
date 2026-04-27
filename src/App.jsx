@@ -7,6 +7,7 @@ import Projects from './components/Projects';
 import GitHubRepos from './components/GitHubRepos';
 import Experience from './components/Experience';
 import Contact from './components/Contact';
+import SplineLanding from './components/SplineLanding';
 
 // Loader screen
 function Loader({ onDone }) {
@@ -156,16 +157,15 @@ function ScrollToTop() {
 }
 
 export default function App() {
-  const [loaded, setLoaded] = useState(false);
+  // Phase 1: Spline landing
+  const [landingDone, setLandingDone] = useState(false);
 
-  const handleDone = useCallback(() => {
-    setLoaded(true);
-  }, []);
-
-  if (!loaded) {
-    return <Loader onDone={handleDone} />;
+  // ── Phase 1: Spline Landing ──
+  if (!landingDone) {
+    return <SplineLanding onEnter={() => setLandingDone(true)} />;
   }
 
+  // ── Phase 2: Full Portfolio (direct, no loader) ──
   return (
     <motion.div
       initial={{ opacity: 0 }}
