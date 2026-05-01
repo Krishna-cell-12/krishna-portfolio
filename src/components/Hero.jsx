@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import Spline from '@splinetool/react-spline';
+import React from 'react';
 import { motion } from 'framer-motion';
 import {
   ArrowDown,
@@ -10,10 +9,11 @@ import {
   Zap,
   Code2,
   Layers,
+  GitBranch,
+  Star,
+  Coffee,
 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './SocialIcons';
-
-const SCENE_URL = 'https://prod.spline.design/9Gn1j7uSxAqhQhxm/scene.splinecode';
 
 const TYPING_STRINGS = [
   'Systems Engineer',
@@ -62,16 +62,42 @@ const stats = [
   { label: 'Open Source', value: '5+', icon: Terminal },
 ];
 
-const floatingBadges = [
-  { icon: Terminal, label: 'Kernel Dev', color: '#00d4ff', delay: 0 },
-  { icon: Cpu, label: 'Systems', color: '#a855f7', delay: 1.2 },
-  { icon: Shield, label: 'Security', color: '#39d353', delay: 2.4 },
-  { icon: Zap, label: 'AI/ML', color: '#f472b6', delay: 0.6 },
+const techStack = [
+  { name: 'Rust', color: '#f97316', bg: 'rgba(249,115,22,0.12)', letter: 'Rs' },
+  { name: 'C/C++', color: '#00d4ff', bg: 'rgba(0,212,255,0.12)', letter: 'C++' },
+  { name: 'Python', color: '#f7df1e', bg: 'rgba(247,223,30,0.10)', letter: 'Py' },
+  { name: 'React', color: '#61dafb', bg: 'rgba(97,218,251,0.10)', letter: 'Re' },
+  { name: 'Linux', color: '#a855f7', bg: 'rgba(168,85,247,0.12)', letter: 'Lx' },
+  { name: 'AI/ML', color: '#f472b6', bg: 'rgba(244,114,182,0.12)', letter: 'AI' },
 ];
+
+const activityDots = Array.from({ length: 52 }, (_, i) => ({
+  id: i,
+  level: Math.floor(Math.random() * 5),
+}));
+
+function ActivityGraph() {
+  const colors = ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'];
+  return (
+    <div style={{ display: 'flex', gap: 3, flexWrap: 'wrap', justifyContent: 'center' }}>
+      {activityDots.map((dot) => (
+        <div
+          key={dot.id}
+          style={{
+            width: 10,
+            height: 10,
+            borderRadius: 2,
+            background: colors[dot.level],
+            border: '1px solid rgba(255,255,255,0.04)',
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 
 export default function Hero() {
   const typed = useTypingEffect(TYPING_STRINGS);
-  const [splineReady, setSplineReady] = useState(false);
 
   return (
     <section
@@ -215,72 +241,184 @@ export default function Hero() {
             </motion.a>
           </div>
 
-          {/* ── RIGHT: Spline 3D Widget ── */}
+          {/* ── RIGHT: Professional Profile Card ── */}
           <motion.div
             initial={{ opacity: 0, scale: 0.92, x: 40 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.3, ease: 'easeOut' }}
-            className="hero-spline-col"
+            className="hero-profile-col"
           >
-            {/* Floating skill badges */}
-            {floatingBadges.map(({ icon: Icon, label, color, delay }, i) => (
-              <motion.div
-                key={i}
-                className="hero-float-badge"
-                style={{
-                  '--badge-color': color,
-                  top: i < 2 ? `${10 + i * 22}%` : 'auto',
-                  bottom: i >= 2 ? `${10 + (i - 2) * 22}%` : 'auto',
-                  left: i % 2 === 0 ? '-18px' : 'auto',
-                  right: i % 2 === 1 ? '-18px' : 'auto',
-                }}
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4 + delay, repeat: Infinity, ease: 'easeInOut', delay }}
-              >
-                <Icon size={14} style={{ color }} />
-                <span>{label}</span>
-              </motion.div>
-            ))}
-
-            {/* Spline container */}
-            <div className="hero-spline-frame">
+            {/* Main profile card */}
+            <div className="hero-profile-card">
               {/* Glow ring */}
               <div className="hero-spline-glow-ring" />
 
-              {/* Skeleton shimmer while loading */}
-              {!splineReady && (
-                <div className="hero-spline-skeleton">
-                  <div className="hero-spline-skeleton-logo">K</div>
-                  <p className="hero-spline-skeleton-text">Loading 3D Scene…</p>
-                  <div className="hero-spline-skeleton-bar">
-                    <div className="hero-spline-skeleton-fill" />
+              {/* Avatar section */}
+              <div className="hero-avatar-section">
+                <div className="hero-avatar-ring">
+                  <div className="hero-avatar">
+                    <span style={{
+                      fontSize: 52,
+                      fontWeight: 900,
+                      fontFamily: 'Inter, sans-serif',
+                      background: 'linear-gradient(135deg, #00d4ff, #a855f7)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}>KA</span>
+                  </div>
+                  {/* Online indicator */}
+                  <div className="hero-avatar-status" />
+                </div>
+
+                <div className="hero-profile-info">
+                  <h3 style={{ color: '#e6edf3', fontWeight: 700, fontSize: 18, margin: 0, lineHeight: 1.2 }}>
+                    Krishna Abhang
+                  </h3>
+                  <p style={{ color: '#8b949e', fontFamily: 'monospace', fontSize: 12, margin: '4px 0 0', letterSpacing: '0.06em' }}>
+                    @krishna-cell-12
+                  </p>
+                  <div style={{ display: 'flex', gap: 6, marginTop: 8, flexWrap: 'wrap' }}>
+                    <span className="hero-profile-tag" style={{ '--tag-color': '#00d4ff' }}>Systems</span>
+                    <span className="hero-profile-tag" style={{ '--tag-color': '#a855f7' }}>Open Source</span>
+                    <span className="hero-profile-tag" style={{ '--tag-color': '#39d353' }}>AI/ML</span>
                   </div>
                 </div>
-              )}
+              </div>
 
-              <Spline
-                scene={SCENE_URL}
-                onLoad={() => setSplineReady(true)}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  opacity: splineReady ? 1 : 0,
-                  transition: 'opacity 0.6s ease',
-                }}
-              />
+              {/* Divider */}
+              <div style={{ height: 1, background: 'rgba(33,38,45,0.8)', margin: '0 0 16px' }} />
+
+              {/* Quick metrics */}
+              <div className="hero-metrics">
+                <div className="hero-metric-item">
+                  <GitBranch size={13} style={{ color: '#39d353' }} />
+                  <span style={{ color: '#8b949e', fontFamily: 'monospace', fontSize: 11 }}>Commits this year</span>
+                  <span style={{ color: '#39d353', fontFamily: 'monospace', fontSize: 12, fontWeight: 700, marginLeft: 'auto' }}>250+</span>
+                </div>
+                <div className="hero-metric-item">
+                  <Star size={13} style={{ color: '#f7df1e' }} />
+                  <span style={{ color: '#8b949e', fontFamily: 'monospace', fontSize: 11 }}>GitHub Stars</span>
+                  <span style={{ color: '#f7df1e', fontFamily: 'monospace', fontSize: 12, fontWeight: 700, marginLeft: 'auto' }}>45+</span>
+                </div>
+                <div className="hero-metric-item">
+                  <Coffee size={13} style={{ color: '#f97316' }} />
+                  <span style={{ color: '#8b949e', fontFamily: 'monospace', fontSize: 11 }}>Hours Coding</span>
+                  <span style={{ color: '#f97316', fontFamily: 'monospace', fontSize: 12, fontWeight: 700, marginLeft: 'auto' }}>1,200+</span>
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div style={{ height: 1, background: 'rgba(33,38,45,0.8)', margin: '4px 0 16px' }} />
+
+              {/* Tech stack */}
+              <div style={{ marginBottom: 16 }}>
+                <p style={{ color: '#8b949e', fontFamily: 'monospace', fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 10 }}>
+                  Tech Stack
+                </p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>
+                  {techStack.map(({ name, color, bg, letter }) => (
+                    <motion.div
+                      key={name}
+                      whileHover={{ scale: 1.08, y: -2 }}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 6,
+                        padding: '5px 10px',
+                        borderRadius: 6,
+                        background: bg,
+                        border: `1px solid ${color}33`,
+                        cursor: 'default',
+                      }}
+                    >
+                      <span style={{
+                        fontFamily: 'monospace',
+                        fontSize: 10,
+                        fontWeight: 700,
+                        color,
+                        minWidth: 20,
+                      }}>{letter}</span>
+                      <span style={{ color: '#8b949e', fontSize: 11 }}>{name}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div style={{ height: 1, background: 'rgba(33,38,45,0.8)', margin: '0 0 14px' }} />
+
+              {/* Activity graph */}
+              <div>
+                <p style={{ color: '#8b949e', fontFamily: 'monospace', fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 10 }}>
+                  Activity
+                </p>
+                <ActivityGraph />
+              </div>
 
               {/* Corner decorations */}
               <div className="hero-spline-corner hero-spline-corner-tl" />
               <div className="hero-spline-corner hero-spline-corner-tr" />
               <div className="hero-spline-corner hero-spline-corner-bl" />
               <div className="hero-spline-corner hero-spline-corner-br" />
-
-              {/* Label strip */}
-              <div className="hero-spline-label">
-                <span className="hero-spline-label-dot" />
-                <span>Interactive 3D · Powered by Spline</span>
-              </div>
             </div>
+
+            {/* Floating accent badges */}
+            <motion.div
+              className="hero-float-badge"
+              style={{
+                '--badge-color': '#39d353',
+                top: '10%',
+                left: '-18px',
+              }}
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <Terminal size={13} style={{ color: '#39d353' }} />
+              <span>Kernel Dev</span>
+            </motion.div>
+
+            <motion.div
+              className="hero-float-badge"
+              style={{
+                '--badge-color': '#a855f7',
+                top: '32%',
+                right: '-18px',
+              }}
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+            >
+              <Cpu size={13} style={{ color: '#a855f7' }} />
+              <span>Systems</span>
+            </motion.div>
+
+            <motion.div
+              className="hero-float-badge"
+              style={{
+                '--badge-color': '#00d4ff',
+                bottom: '28%',
+                left: '-18px',
+              }}
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+            >
+              <Shield size={13} style={{ color: '#00d4ff' }} />
+              <span>Security</span>
+            </motion.div>
+
+            <motion.div
+              className="hero-float-badge"
+              style={{
+                '--badge-color': '#f472b6',
+                bottom: '8%',
+                right: '-18px',
+              }}
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+            >
+              <Zap size={13} style={{ color: '#f472b6' }} />
+              <span>AI/ML</span>
+            </motion.div>
           </motion.div>
 
         </div>
